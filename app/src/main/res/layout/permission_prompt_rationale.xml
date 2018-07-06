@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:padding="30dp">
+
+  <RelativeLayout
+    android:layout_width="300dp"
+    android:layout_height="wrap_content"
+    android:background="@drawable/sh_permission_rationale_body"
+    android:gravity="center"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.5"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintVertical_bias="0.46">
+
+    <android.support.v7.widget.AppCompatTextView
+      android:id="@+id/apnaa_permissions_header"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_alignParentTop="true"
+      android:background="@drawable/sh_permission_rationale_header"
+      android:padding="@dimen/spacing_x6"
+      android:textColor="@color/txt_light"
+      android:textSize="@dimen/txt_h5"
+      tools:text="Please, Tap SETTING > Permission, then enable the itens listed below" />
+
+    <br.com.tartagliaeg.rxp.ui_components.DynamicHeightListView
+      android:id="@+id/apnaa_permissions_list"
+      android:layout_width="wrap_content"
+      android:layout_height="0dp"
+      android:layout_below="@id/apnaa_permissions_header"
+      app:maxHeight="250dp" />
+
+
+    <android.support.v7.widget.AppCompatButton
+      android:id="@+id/apnaa_cancel_button"
+      style="?attr/borderlessButtonStyle"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_below="@id/apnaa_permissions_list"
+      android:layout_marginBottom="@dimen/spacing_x2"
+      android:layout_marginTop="@dimen/spacing_x2"
+      android:layout_toLeftOf="@id/apnaa_settings_button"
+      android:layout_toStartOf="@id/apnaa_settings_button"
+      android:background="?attr/selectableItemBackground"
+      android:padding="@dimen/spacing_x2"
+      android:textAllCaps="true"
+      android:textColor="@color/app_accent"
+      android:textSize="@dimen/txt_h4"
+      tools:text="Cancel" />
+
+    <android.support.v7.widget.AppCompatButton
+      android:id="@+id/apnaa_settings_button"
+      style="?attr/borderlessButtonStyle"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentEnd="true"
+      android:layout_alignParentRight="true"
+      android:layout_below="@id/apnaa_permissions_list"
+      android:layout_marginBottom="@dimen/spacing_x2"
+      android:layout_marginEnd="@dimen/spacing_x4"
+      android:layout_marginRight="@dimen/spacing_x4"
+      android:layout_marginTop="@dimen/spacing_x2"
+      android:background="?attr/selectableItemBackgroundBorderless"
+      android:padding="@dimen/spacing_x2"
+      android:textAllCaps="true"
+      android:textColor="@color/app_accent"
+      android:textSize="@dimen/txt_h4"
+      tools:text="Settings" />
+
+  </RelativeLayout>
+</android.support.constraint.ConstraintLayout>

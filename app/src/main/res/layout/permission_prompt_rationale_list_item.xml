@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:orientation="horizontal"
+  android:paddingBottom="@dimen/spacing_x2"
+  android:paddingEnd="@dimen/spacing_x4"
+  android:paddingLeft="@dimen/spacing_x4"
+  android:paddingRight="@dimen/spacing_x4"
+  android:paddingStart="@dimen/spacing_x4"
+  android:paddingTop="@dimen/spacing_x4">
+
+  <android.support.v7.widget.AppCompatImageView
+    android:id="@+id/capi_permission_icon"
+    android:layout_width="@dimen/spacing_x8"
+    android:layout_height="@dimen/spacing_x8"
+    android:layout_marginEnd="@dimen/spacing_x6"
+    android:layout_marginRight="@dimen/spacing_x6" />
+
+  <android.support.v7.widget.AppCompatTextView
+    android:id="@+id/capi_prompt_message"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textColor="#424242"
+    android:textSize="@dimen/txt_h4"
+    tools:text="@string/prompt_permission_access_fine_location" />
+
+</LinearLayout>

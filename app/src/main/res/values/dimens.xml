@@ -1,0 +1,20 @@
+<resources>
+  <dimen name="fab_margin">16dp</dimen>
+
+  <dimen name="spacing_x1">4dp</dimen>
+  <dimen name="spacing_x2">8dp</dimen>
+  <dimen name="spacing_x3">12dp</dimen>
+  <dimen name="spacing_x4">16dp</dimen>
+  <dimen name="spacing_x5">20dp</dimen>
+  <dimen name="spacing_x6">24dp</dimen>
+  <dimen name="spacing_x7">28dp</dimen>
+  <dimen name="spacing_x8">32dp</dimen>
+
+  <dimen name="txt_h1">22sp</dimen>
+  <dimen name="txt_h2">20sp</dimen>
+  <dimen name="txt_h3">18sp</dimen>
+  <dimen name="txt_h4">16sp</dimen>
+  <dimen name="txt_h5">14sp</dimen>
+  <dimen name="txt_h6">12sp</dimen>
+
+</resources>
