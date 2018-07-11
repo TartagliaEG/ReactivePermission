@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+  <string name="notification_title">Ação pendente</string>
+  <string name="notification_content">Nós precisamos de sua permissão para continuar</string>
+
+  <plurals name="never_ask_again_header">
+    <item quantity="one">Por favor, toque em %1$s > Permissões, então ative a seguinte permissão</item>
+    <item quantity="other">Por favor, toque em %1$s > Permissões, então ative as permissões listadas</item>
+  </plurals>
+  <string name="never_ask_again_settings_button">Configurações</string>
+  <string name="never_ask_again_cancel_button">Cancelar</string>
+
+  <plurals name="permission_rationale_header">
+    <item quantity="one" tools:ignore="ImpliedQuantity">Nós precisamos de sua permissão para continuar</item>
+    <item quantity="other">Nós precisamos de algumas permissões para continuar</item>
+  </plurals>
+  <string name="permission_rationale_confirm_button">Continuar</string>
+  <string name="permission_rationale_cancel_button">Não Agora</string>
+
+  <string name="prompt_permission_camera">Para tirar fotos e gravar vídeos, nós precisamos de permissão para acessar sua câmera.</string>
+  <string name="prompt_permission_access_fine_location">Para descobrir sua localização, nós precisamos de permissão para acessar o GPS do celular</string>
+  <string name="prompt_permission_access_coarse_location">Para descobrir sua localização, nós precisamos de permissão para acessar o GPS do celular</string>
+</resources>

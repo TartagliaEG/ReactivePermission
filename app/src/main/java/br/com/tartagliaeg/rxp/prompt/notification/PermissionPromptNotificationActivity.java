@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import java.util.List;
 
 import br.com.tartagliaeg.rxp.R;
+import br.com.tartagliaeg.rxp.debug.LogTag;
 import br.com.tartagliaeg.rxp.domain.Permission;
 import br.com.tartagliaeg.rxp.domain.PermissionFragment;
 import br.com.tartagliaeg.rxp.domain.PermissionPack;
@@ -21,7 +22,7 @@ import io.reactivex.disposables.Disposable;
  * ...
  */
 public class PermissionPromptNotificationActivity extends LogActivity {
-  private static final String TAG = PermissionPromptNotificationActivity.class.getName();
+  private static final String TAG = LogTag.TAG + PermissionPromptNotificationActivity.class.getName();
   private static final String EXT_ARGS = TAG + ".args";
 
   private PermissionFragment mPermissionPrompt;

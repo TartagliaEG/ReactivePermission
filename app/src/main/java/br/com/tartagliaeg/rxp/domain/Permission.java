@@ -36,7 +36,7 @@ public class Permission implements Comparable<Permission> {
         .getPackageManager()
         .getPackageInfo(context.getPackageName(), PackageManager.GET_PERMISSIONS)
         .requestedPermissions).contains(name))
-        throw new RuntimeException(String.format("The newRequestMerging '%s' is not declared on the manifest", name));
+        throw new RuntimeException(String.format("The permission '%s' is not declared on the manifest", name));
 
     } catch (PackageManager.NameNotFoundException e) {
       throw new RuntimeException(e);

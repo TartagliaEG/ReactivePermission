@@ -4,10 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.support.v4.app.Fragment;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,6 +14,7 @@ import java.util.Map;
  * Created by TartagliaEG on 2018/06/29.
  * ...
  */
+@SuppressWarnings("unused")
 public class PermissionPack {
   private final Map<String, Permission> mPermissions = new HashMap<>();
 
@@ -53,6 +52,7 @@ public class PermissionPack {
     return new PermissionPack(context, permissions);
   }
 
+  @SuppressWarnings("WeakerAccess")
   public Permission get(String permissionName) {
     if (!mPermissions.containsKey(permissionName))
       throw new IllegalArgumentException("No newRequestMerging found with name: " + permissionName);
@@ -63,6 +63,7 @@ public class PermissionPack {
     return mPermissions.values();
   }
 
+  @SuppressWarnings("WeakerAccess")
   void addPermission(Permission permission) {
     mPermissions.put(permission.getName(), permission);
   }
@@ -170,21 +171,12 @@ public class PermissionPack {
     return names;
   }
 
-  public String generatePermissionsIdentifier() {
-    StringBuilder identifier = new StringBuilder();
-    List<Permission> permissions = new ArrayList<>(mPermissions.values());
-    Collections.sort(permissions);
-
-    for (Permission permission : permissions)
-      identifier.append(permission.getName()).append(":");
-
-    return identifier.toString();
-  }
 
   public int size() {
     return mPermissions.size();
   }
 
+  @SuppressWarnings("unused")
   public boolean isEmpty() {
     return mPermissions.isEmpty();
   }

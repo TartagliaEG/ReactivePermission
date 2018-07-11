@@ -1,5 +1,6 @@
 package br.com.tartagliaeg.rxp.domain;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.pm.PermissionGroupInfo;
@@ -7,12 +8,17 @@ import android.content.pm.PermissionInfo;
 import android.graphics.drawable.Drawable;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
+import android.support.v4.app.Fragment;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import br.com.tartagliaeg.rxp.ReactivePermissionConfiguration;
 
 /**
  * Created by TartagliaEG on 2018/04/03.
@@ -20,8 +26,9 @@ import java.util.Map;
  */
 public class PermissionRequest implements Parcelable {
   private final Map<String, PermissionMeta> mPermissions;
+  private final ReactivePermissionConfiguration mConfig = ReactivePermissionConfiguration.getInstance();
 
-  PermissionRequest(String permission, @StringRes int promptMessage) {
+  private PermissionRequest(String permission, @StringRes int promptMessage) {
     mPermissions = new HashMap<>();
     mPermissions.put(permission, new PermissionMeta(permission, promptMessage));
   }
@@ -58,6 +65,7 @@ public class PermissionRequest implements Parcelable {
     return new PermissionRequest(permissions);
   }
 
+  @SuppressWarnings("unused")
   public PermissionRequest newRequestMerging(String permission, @StringRes int promptMessage) {
     Map<String, PermissionMeta> permissions = new HashMap<>();
     permissions.put(permission, new PermissionMeta(permission, promptMessage));
@@ -65,6 +73,7 @@ public class PermissionRequest implements Parcelable {
     return new PermissionRequest(permissions);
   }
 
+  @SuppressWarnings("unused")
   public PermissionRequest newRequestExcluding(PermissionRequest request) {
     Map<String, PermissionMeta> permissions = new HashMap<>();
 
@@ -76,8 +85,7 @@ public class PermissionRequest implements Parcelable {
   }
 
   public PermissionRequest newRequestExcluding(String... permissions) {
-    Map<String, PermissionMeta> permissionMap = new HashMap<>();
-    permissionMap.putAll(mPermissions);
+    Map<String, PermissionMeta> permissionMap = new HashMap<>(mPermissions);
 
     for (String permission : permissions)
       permissionMap.remove(permission);
@@ -90,21 +98,69 @@ public class PermissionRequest implements Parcelable {
   }
 
   public List<PermissionMeta> getPermissionMetas() {
-    List<PermissionMeta> metas = new ArrayList<>();
-    metas.addAll(mPermissions.values());
-    return metas;
+    return new ArrayList<>(mPermissions.values());
   }
 
   public int size() {
     return mPermissions.size();
   }
 
+  @SuppressWarnings("unused")
   @StringRes
   public int getPromptMessage(String permission) {
     if (!mPermissions.containsKey(permission))
       throw new RuntimeException("No message associated with the newRequestMerging: " + permission);
 
     return mPermissions.get(permission).mPromptMessage;
+  }
+
+  /**
+   * Check whether this request should show the rationale dialog. This method uses the configured
+   * {@link br.com.tartagliaeg.rxp.ReactivePermissionConfiguration.ShowRationaleStrategy} on {@link ReactivePermissionConfiguration} class.
+   *
+   * @param fragment Any attached fragment.
+   * @return a boolean stating if the rationale dialog should be shown
+   */
+  public boolean shouldShowRationale(@NonNull Fragment fragment) {
+    return shouldShowRationale(null, fragment);
+  }
+
+  /**
+   * Check whether this request should show the rationale dialog. This method uses the configured
+   * {@link br.com.tartagliaeg.rxp.ReactivePermissionConfiguration.ShowRationaleStrategy} on {@link ReactivePermissionConfiguration} class.
+   *
+   * @param activity Any activity.
+   * @return a boolean stating if the rationale dialog should be shown
+   */
+  @SuppressWarnings("unused")
+  public boolean shouldShowRationale(@NonNull Activity activity) {
+    return shouldShowRationale(activity, null);
+  }
+
+  private boolean shouldShowRationale(@Nullable Activity activity, @Nullable Fragment fragment) {
+    if (fragment == null && activity == null)
+      throw new IllegalArgumentException("Invalid arguments. You must provide either a valid activity or fragment");
+
+    Context context = activity == null ? fragment.getContext() : activity;
+
+    if (context == null)
+      throw new IllegalStateException("Failed to extract a valid context from the given fragment");
+
+
+    switch (mConfig.getPermissionRationaleStrategy()) {
+      case NEVER:
+        return false;
+      case BEFORE_ANY_PERMISSION:
+        return true;
+      default:
+        return activity == null
+          ? asPack(context).isAnyNeverAskAgain(fragment)
+          : asPack(context).isAnyNeverAskAgain(activity);
+    }
+  }
+
+  public PermissionPack asPack(Context context) {
+    return PermissionPack.from(context, getPermissionNames());
   }
 
 
@@ -146,6 +202,7 @@ public class PermissionRequest implements Parcelable {
     }
   };
 
+  @SuppressWarnings("BooleanMethodIsAlwaysInverted")
   public boolean isEmpty() {
     return mPermissions.isEmpty();
   }
@@ -154,6 +211,7 @@ public class PermissionRequest implements Parcelable {
     return mPermissions.containsKey(permission);
   }
 
+  @SuppressWarnings("WeakerAccess")
   public static class PermissionMeta {
     public final String mName;
     public final int mPromptMessage;

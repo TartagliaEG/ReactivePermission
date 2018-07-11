@@ -41,11 +41,11 @@ public class PermissionRationaleActivity extends AppCompatActivity {
   private PermissionRequest mRequest;
   private AppCompatButton mBtnCancel;
   private AppCompatButton mBtnSettings;
-  private ListView mPermissionList;
   private AppCompatTextView mHeader;
+  private Adapter mListAdapter;
 
   public static int extractResponse(Intent intent) {
-    return RST_CANCELED;
+    return intent.getIntExtra(EXT_RST_TYPE, 0);
   }
 
   public static Intent newIntent(Context context, PermissionRequest request) {
@@ -87,8 +87,9 @@ public class PermissionRationaleActivity extends AppCompatActivity {
       }
     });
 
-    mPermissionList = findViewById(R.id.apnaa_permissions_list);
-    mPermissionList.setAdapter(new Adapter(this, mRequest));
+    ListView permissionList = findViewById(R.id.apnaa_permissions_list);
+    mListAdapter = new Adapter(this, mRequest);
+    permissionList.setAdapter(mListAdapter);
 
     mHeader = findViewById(R.id.apnaa_permissions_header);
   }
@@ -107,20 +108,33 @@ public class PermissionRationaleActivity extends AppCompatActivity {
       return;
     }
 
+    mListAdapter.updateDateSet(mRequest
+      .newRequestExcluding(pack.getPackFilteredByGranted().getPermissionNames())
+    );
+
     boolean isAnyNeverAskAgain = pack.isAnyNeverAskAgain(this);
     ReactivePermissionConfiguration config = ReactivePermissionConfiguration.getInstance();
+
+    String confirmText = getResources().getString(
+      isAnyNeverAskAgain ? config.getNeverAskAgainSettingsButton() : config.getPermissionRationaleConfirmButton()
+    );
+
+    String cancelText = this.getResources().getString(
+      isAnyNeverAskAgain ? config.getNeverAskAgainCancelButton() : config.getPermissionRationaleCancelButton()
+    );
 
     String headerText = this.getResources().getQuantityString(
       isAnyNeverAskAgain
         ? config.getNeverAskAgainHeader()
         : config.getPermissionRationaleHeader(),
-      mRequest.size()
+      pack.getPackFilteredByDenied().size(),
+      confirmText
     );
 
     mHeader.setText(headerText);
 
-    mBtnCancel.setText(isAnyNeverAskAgain ? config.getNeverAskAgainCancelButton() : config.getPermissionRationaleCancelButton());
-    mBtnSettings.setText(isAnyNeverAskAgain ? config.getNeverAskAgainSettingsButton() : config.getPermissionRationaleConfirmButton());
+    mBtnCancel.setText(cancelText);
+    mBtnSettings.setText(confirmText);
   }
 
   @Override
@@ -132,10 +146,16 @@ public class PermissionRationaleActivity extends AppCompatActivity {
     private final List<PermissionRequest.PermissionMeta> mPermissionMetas;
     private final Context mContext;
 
-    public Adapter(Context context, PermissionRequest request) {
+    Adapter(Context context, PermissionRequest request) {
       super(context, R.layout.permission_prompt_rationale_list_item);
       mPermissionMetas = request.getPermissionMetas();
       mContext = context;
+    }
+
+    private void updateDateSet(PermissionRequest request) {
+      mPermissionMetas.clear();
+      mPermissionMetas.addAll(request.getPermissionMetas());
+      notifyDataSetChanged();
     }
 
 

@@ -5,23 +5,22 @@
   <string name="dummy_button">Dummy Button</string>
   <string name="dummy_content">DUMMY\nCONTENT</string>
 
-  <string name="notification_title" >Action required</string>
-  <string name="notification_content" >We need your permission to proceed</string>
+  <string name="notification_title">Action required</string>
+  <string name="notification_content">We need your permission to proceed</string>
 
   <plurals name="never_ask_again_header">
-    <item quantity="one">Please, tap SETTINGS > Permissions, then enable the following permission</item>
-    <item quantity="other">Please, tap SETTINGS > Permissions, then enable the following permissions</item>
+    <item quantity="one">Please, tap %s > Permissions, then enable the following permission</item>
+    <item quantity="other">Please, tap %s > Permissions, then enable the following permissions</item>
   </plurals>
-  <string name="never_ask_again_settings_button" >Settings</string>
-  <string name="never_ask_again_cancel_button" >Cancel</string>
+  <string name="never_ask_again_settings_button">Settings</string>
+  <string name="never_ask_again_cancel_button">Cancel</string>
 
   <plurals name="permission_rationale_header">
     <item quantity="other">We need your permission to proceed</item>
   </plurals>
-  <string name="permission_rationale_confirm_button" >Continue</string>
-  <string name="permission_rationale_cancel_button" >Not Now</string>
+  <string name="permission_rationale_confirm_button">Continue</string>
+  <string name="permission_rationale_cancel_button">Not Now</string>
 
-  <string name="never_ask_again_instructions">Please, tap settings and turn on the %1$s permission.</string>
   <string name="prompt_permission_camera">To take photos and record videos, we need permission to access your camera.</string>
   <string name="prompt_permission_access_fine_location">To find out your location, we need permission to access the phone\'s GPS.</string>
   <string name="prompt_permission_access_coarse_location">To find out your location, we need permission to access the phone\'s GPS.</string>

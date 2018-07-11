@@ -16,8 +16,8 @@ import java.util.Set;
 import br.com.tartagliaeg.rxp.domain.Permission;
 import br.com.tartagliaeg.rxp.domain.PermissionFragment;
 import br.com.tartagliaeg.rxp.domain.PermissionPack;
-import br.com.tartagliaeg.rxp.prompt.IPermissionPromptContinuable;
 import br.com.tartagliaeg.rxp.domain.PermissionRequest;
+import br.com.tartagliaeg.rxp.prompt.IPermissionPromptContinuable;
 import br.com.tartagliaeg.rxp.utils.SimpleObserver;
 import io.reactivex.Observable;
 import io.reactivex.disposables.Disposable;
@@ -79,6 +79,7 @@ public class PermissionPromptFragment extends PermissionFragment implements IPer
   }
 
 
+  @SuppressWarnings("BooleanMethodIsAlwaysInverted")
   private boolean isWaitingPermissionsDialog() {
     return mPermissionDisposable != null;
   }

@@ -14,7 +14,7 @@ import android.util.Log;
  */
 
 public class LogFragment extends Fragment {
-  private String TAG = this.getClass().getSimpleName();
+  private String TAG = LogTag.TAG + this.getClass().getSimpleName();
 
   @Override
   public void onAttach(Context context) {

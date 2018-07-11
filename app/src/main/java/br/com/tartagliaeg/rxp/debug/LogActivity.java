@@ -11,7 +11,7 @@ import android.util.Log;
  * Class used to log the lifecycle. Used for debug purpose.
  */
 public abstract class LogActivity extends AppCompatActivity {
-  private String TAG = this.getClass().getSimpleName();
+  private String TAG = LogTag.TAG +  this.getClass().getSimpleName();
 
   @Override
   public void onCreate(@Nullable Bundle savedInstanceState) {

@@ -8,6 +8,7 @@ import android.os.Parcel;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
+import br.com.tartagliaeg.rxp.debug.LogTag;
 import br.com.tartagliaeg.rxp.domain.PermissionPack;
 
 /**
@@ -15,7 +16,7 @@ import br.com.tartagliaeg.rxp.domain.PermissionPack;
  * ...
  */
 public class PermissionPromptBroadcast implements IPermissionPromptBroadcast.Registration, IPermissionPromptBroadcast.Channel {
-  private static final String TAG = PermissionPromptBroadcast.class.getName();
+  private static final String TAG = LogTag.TAG + PermissionPromptBroadcast.class.getSimpleName();
   private static final String EXT_PERMISSIONS = TAG + ".PERMISSIONS";
   private static final String EXT_CONNECTED = TAG + ".CONNECTED";
 
@@ -37,7 +38,7 @@ public class PermissionPromptBroadcast implements IPermissionPromptBroadcast.Reg
 
   @Override
   public void register(Context context, final IPermissionPromptBroadcast.OnChannelConnected connected, final IPermissionPromptBroadcast.OnResult receiver) {
-    Log.d(getClass().getSimpleName(), "Register: " + mBroadcastResultFilter);
+    Log.d(TAG, "Register: " + mBroadcastResultFilter);
     mBroadcastResultListener = new BroadcastReceiver() {
       @Override
       public void onReceive(Context context, Intent intent) {
@@ -55,7 +56,7 @@ public class PermissionPromptBroadcast implements IPermissionPromptBroadcast.Reg
 
   @Override
   public void unregister(Context context) {
-    Log.d(getClass().getSimpleName(), "Unregister: " + mBroadcastResultFilter);
+    Log.d(TAG, "Unregister: " + mBroadcastResultFilter);
     LocalBroadcastManager
       .getInstance(context)
       .unregisterReceiver(mBroadcastResultListener);
@@ -64,7 +65,7 @@ public class PermissionPromptBroadcast implements IPermissionPromptBroadcast.Reg
 
   @Override
   public void sendResponse(Context context, String... permissions) {
-    Log.d(getClass().getSimpleName(), "sendResponse: " + mBroadcastResultFilter);
+    Log.d(TAG, "sendResponse: " + mBroadcastResultFilter);
     Intent intent = new Intent(mBroadcastResultFilter);
     intent.putExtra(EXT_PERMISSIONS, permissions);
 

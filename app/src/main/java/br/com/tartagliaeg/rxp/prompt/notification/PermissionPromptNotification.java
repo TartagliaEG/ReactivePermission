@@ -13,13 +13,14 @@ import android.support.v4.app.NotificationCompat;
 import java.util.List;
 import java.util.UUID;
 
-import br.com.tartagliaeg.rxp.R;
-import br.com.tartagliaeg.rxp.prompt.notification.broadcast.IPermissionPromptBroadcast;
-import br.com.tartagliaeg.rxp.prompt.notification.broadcast.PermissionPromptBroadcast;
+import br.com.tartagliaeg.rxp.ReactivePermissionConfiguration;
+import br.com.tartagliaeg.rxp.debug.LogTag;
 import br.com.tartagliaeg.rxp.domain.Permission;
 import br.com.tartagliaeg.rxp.domain.PermissionPack;
-import br.com.tartagliaeg.rxp.prompt.IPermissionPrompt;
 import br.com.tartagliaeg.rxp.domain.PermissionRequest;
+import br.com.tartagliaeg.rxp.prompt.IPermissionPrompt;
+import br.com.tartagliaeg.rxp.prompt.notification.broadcast.IPermissionPromptBroadcast;
+import br.com.tartagliaeg.rxp.prompt.notification.broadcast.PermissionPromptBroadcast;
 import br.com.tartagliaeg.rxp.utils.Pointer;
 import io.reactivex.Observable;
 import io.reactivex.disposables.Disposable;
@@ -36,7 +37,7 @@ import io.reactivex.subjects.PublishSubject;
  * TODO: Handle situations where more than one notification is being shown
  */
 public class PermissionPromptNotification implements IPermissionPrompt {
-  private static final String TAG = PermissionPromptNotification.class.getName();
+  private static final String TAG = LogTag.TAG + PermissionPromptNotification.class.getSimpleName();
   private static final String NOTIFICATION_CHANNEL = TAG + ".notification_channel";
   private static final int NOTIFICATION_ID = 100101;
 
@@ -62,11 +63,13 @@ public class PermissionPromptNotification implements IPermissionPrompt {
           Intent intent = PermissionPromptNotificationActivity.newIntent(context, args);
           PendingIntent pi = PendingIntent.getActivity(context, 1, intent, PendingIntent.FLAG_ONE_SHOT);
 
+          ReactivePermissionConfiguration config = ReactivePermissionConfiguration.getInstance();
+
           Notification notification = new NotificationCompat.Builder(context, channelId)
             .setContentIntent(pi)
-            .setSmallIcon(R.drawable.ic_launcher_foreground)
-            .setContentText("O aplicativo precisa de algumas permissões")
-            .setContentTitle("Permissões necessárias")
+            .setSmallIcon(config.getNotificationIcon())
+            .setContentText(context.getResources().getString(config.getNotificationContent()))
+            .setContentTitle(context.getResources().getString(config.getNotificationTitle()))
             .setAutoCancel(true)
             .build();
 
