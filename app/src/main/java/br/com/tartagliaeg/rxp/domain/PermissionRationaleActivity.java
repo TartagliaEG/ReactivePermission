@@ -22,6 +22,7 @@ import android.widget.ListView;
 
 import java.util.List;
 
+import br.com.tartagliaeg.rxp.Constants;
 import br.com.tartagliaeg.rxp.R;
 import br.com.tartagliaeg.rxp.ReactivePermissionConfiguration;
 
@@ -30,7 +31,7 @@ import br.com.tartagliaeg.rxp.ReactivePermissionConfiguration;
  * ...
  */
 public class PermissionRationaleActivity extends AppCompatActivity {
-  private static final String TAG = PermissionRationaleActivity.class.getName();
+  private static final String TAG = Constants.TAG + PermissionRationaleActivity.class.getName();
   private static final String EXT_PERMISSION_REQUEST = TAG + ".permission_request";
   private static final String EXT_RST_TYPE = TAG + ".result_type";
 

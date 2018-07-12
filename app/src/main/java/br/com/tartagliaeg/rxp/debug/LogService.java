@@ -6,8 +6,10 @@ import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
+import br.com.tartagliaeg.rxp.Constants;
+
 public abstract class LogService extends Service {
-  private static final String TAG = LogTag.TAG + LogService.class.getSimpleName();
+  private static final String TAG = Constants.TAG + LogService.class.getSimpleName();
 
   @Override
   public void onCreate() {

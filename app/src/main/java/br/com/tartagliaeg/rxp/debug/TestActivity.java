@@ -1,20 +1,18 @@
 package br.com.tartagliaeg.rxp.debug;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 
+import br.com.tartagliaeg.rxp.Constants;
 import br.com.tartagliaeg.rxp.R;
 import br.com.tartagliaeg.rxp.domain.PermissionPack;
 import br.com.tartagliaeg.rxp.domain.PermissionRequest;
 import br.com.tartagliaeg.rxp.domain.PermissionRequests;
-import br.com.tartagliaeg.rxp.prompt.IPermissionPrompt;
 import br.com.tartagliaeg.rxp.prompt.IPermissionPromptContinuable;
 import br.com.tartagliaeg.rxp.prompt.fragment.PermissionPromptFragment;
-import br.com.tartagliaeg.rxp.prompt.notification.PermissionPromptNotification;
 import br.com.tartagliaeg.rxp.utils.SimpleObserver;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
@@ -23,39 +21,33 @@ import io.reactivex.disposables.Disposable;
  * Used to test the library.
  */
 public class TestActivity extends LogActivity {
-  private static final String TAG = TestActivity.class.getName();
-  private static final int PERM_LOCATION = 100105;
-  private IPermissionPrompt mPerms;
+  private static final String TAG = Constants.TAG + TestActivity.class.getSimpleName();
+  private static final int PERM_CODE = 100105;
+  private IPermissionPromptContinuable mPerms;
   private CompositeDisposable mDisposables = new CompositeDisposable();
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
-    Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+    Toolbar toolbar = findViewById(R.id.toolbar);
     setSupportActionBar(toolbar);
 
 //    final PermissionPromptNotification mPerms = new PermissionPromptNotification(this);
-    mPerms = new PermissionPromptNotification(this);
-//      PermissionPromptFragment.createOrRetrievePermissionPrompt(getSupportFragmentManager());
+//    mPerms = new PermissionPromptNotification(this);
+    mPerms = PermissionPromptFragment.createOrRetrievePermissionPrompt(getSupportFragmentManager());
 
     FloatingActionButton fab = findViewById(R.id.fab);
     fab.setOnClickListener(new View.OnClickListener() {
 
       public void onClick(View view) {
 
-        Intent intent = new Intent(TestActivity.this, TestService.class);
-        startService(intent);
-//        mPerms
-//          .promptPermissions(PermissionRequest.newRequestFrom(
-//            PermissionRequests.CAMERA,
-//            PermissionRequests.ACCESS_FINE_LOCATION
-//          ))
-//          .subscribe(handleLocationPermission());
-
-//        mPerms
-//          .promptPermissions(1111, PermissionRequests.CAMERA)
-//          .subscribe(handleLocationPermission());
+        mPerms
+          .promptPermissions(PERM_CODE, PermissionRequest.newRequestFrom(
+            PermissionRequests.CAMERA,
+            PermissionRequests.ACCESS_FINE_LOCATION
+          ))
+          .subscribe(handleLocationPermission());
 
       }
     });
@@ -65,20 +57,12 @@ public class TestActivity extends LogActivity {
   protected void onStart() {
     super.onStart();
 
-//    mPerms
-//      .continuePromptPermissions(
-//        PERM_LOCATION,
-//        PermissionRequests.ACCESS_FINE_LOCATION
-//      )
-//      .subscribe(handleLocationPermission());
-//
-//    mPerms
-//      .continuePromptPermissions(
-//        1111,
-//        PermissionRequests.CAMERA
-//      )
-//      .subscribe(handleLocationPermission());
-//
+    mPerms
+      .continuePromptPermissions(
+        PERM_CODE,
+        PermissionRequests.ACCESS_FINE_LOCATION
+      )
+      .subscribe(handleLocationPermission());
 
   }
 
@@ -99,7 +83,7 @@ public class TestActivity extends LogActivity {
 
       @Override
       public void onNext(PermissionPack pack) {
-        Log.d(getClass().getName(), pack.toString());
+        Log.d(TAG, pack.toString());
       }
     };
   }

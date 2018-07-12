@@ -20,4 +20,7 @@
   <string name="prompt_permission_camera">Para tirar fotos e gravar vídeos, nós precisamos de permissão para acessar sua câmera.</string>
   <string name="prompt_permission_access_fine_location">Para descobrir sua localização, nós precisamos de permissão para acessar o GPS do celular</string>
   <string name="prompt_permission_access_coarse_location">Para descobrir sua localização, nós precisamos de permissão para acessar o GPS do celular</string>
+  <string name="prompt_permission_read_external_storage">Para acessarmos arquivos no seu dispositivo, nós precisamos de permissão de leitura em disco</string>
+  <string name="prompt_permission_write_external_storage">Para salvarmos arquivos no seu dispositivo, nós precisamos de permissão de escrita em disco</string>
+
 </resources>

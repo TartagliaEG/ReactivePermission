@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 
+import br.com.tartagliaeg.rxp.Constants;
 import br.com.tartagliaeg.rxp.utils.Intents;
 import io.reactivex.Observable;
 import io.reactivex.subjects.PublishSubject;
@@ -21,7 +22,7 @@ public class PermissionFragment extends Fragment {
   private static final int RC_RATIONALE_DIALOG = 27402;
   private static final int RC_OPEN_SETTINGS = 27403;
 
-  private static final String TAG = PermissionFragment.class.getName();
+  private static final String TAG = Constants.TAG + PermissionFragment.class.getSimpleName();
   private static final String FRAGMENT_TAG = "Fragment:" + TAG;
   private static final String SVD_IS_WAITING_DIALOG = TAG + ".waiting_dialog";
 

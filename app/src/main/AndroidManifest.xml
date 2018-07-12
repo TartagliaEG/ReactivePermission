@@ -29,7 +29,6 @@
       android:theme="@style/NeverAskAgainActivity"
       />
 
-    <service android:name=".debug.TestService" />
   </application>
 
 </manifest>

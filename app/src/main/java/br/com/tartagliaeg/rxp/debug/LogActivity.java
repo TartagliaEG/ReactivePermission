@@ -5,13 +5,15 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
+import br.com.tartagliaeg.rxp.Constants;
+
 /**
  * Created by TartagliaEG on 2018/07/02.
  *
  * Class used to log the lifecycle. Used for debug purpose.
  */
 public abstract class LogActivity extends AppCompatActivity {
-  private String TAG = LogTag.TAG +  this.getClass().getSimpleName();
+  private String TAG = Constants.TAG +  this.getClass().getSimpleName();
 
   @Override
   public void onCreate(@Nullable Bundle savedInstanceState) {

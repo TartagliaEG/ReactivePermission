@@ -24,5 +24,7 @@
   <string name="prompt_permission_camera">To take photos and record videos, we need permission to access your camera.</string>
   <string name="prompt_permission_access_fine_location">To find out your location, we need permission to access the phone\'s GPS.</string>
   <string name="prompt_permission_access_coarse_location">To find out your location, we need permission to access the phone\'s GPS.</string>
+  <string name="prompt_permission_read_external_storage">To access files in your device, we need permission to read the phone\'s disk.</string>
+  <string name="prompt_permission_write_external_storage">To store files in your device, we need permission to write to the phone\'s disk.</string>
 
 </resources>

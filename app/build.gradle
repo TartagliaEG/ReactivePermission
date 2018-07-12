@@ -16,6 +16,16 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    sourceSets {
+        main {
+            java {
+                exclude 'br.com.tartagliaeg.rxp.debug.LogActivity'
+                exclude 'br.com.tartagliaeg.rxp.debug.LogFragment'
+                exclude 'br.com.tartagliaeg.rxp.debug.LogService'
+                exclude 'br.com.tartagliaeg.rxp.debug.TestActivity'
+            }
+        }
+    }
 }
 
 dependencies {

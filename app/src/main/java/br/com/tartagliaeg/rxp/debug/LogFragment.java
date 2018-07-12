@@ -7,6 +7,8 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 
+import br.com.tartagliaeg.rxp.Constants;
+
 /**
  * Created by tartagle on 03/07/2018.
  *
@@ -14,7 +16,7 @@ import android.util.Log;
  */
 
 public class LogFragment extends Fragment {
-  private String TAG = LogTag.TAG + this.getClass().getSimpleName();
+  private String TAG = Constants.TAG + this.getClass().getSimpleName();
 
   @Override
   public void onAttach(Context context) {

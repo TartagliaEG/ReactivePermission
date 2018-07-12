@@ -10,13 +10,15 @@ import android.support.v4.app.Fragment;
 
 import java.util.Arrays;
 
+import br.com.tartagliaeg.rxp.Constants;
+
 /**
  * Created by TartagliaEG on 2018/06/29.
  * ...
  */
 @SuppressWarnings({"WeakerAccess", "unused"})
 public class Permission implements Comparable<Permission> {
-  private static final String TAG = Permission.class.getName();
+  private static final String TAG = Constants.TAG + Permission.class.getSimpleName();
 
   private static final String SP_NAME = TAG + ".PERMISSIONS_SHARED_PREFERENCES";
   private static final String SP_PERMISSION_ASKED = TAG + ".PERMISSION_ASKED.";

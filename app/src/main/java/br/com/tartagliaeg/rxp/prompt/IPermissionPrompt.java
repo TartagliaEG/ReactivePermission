@@ -16,6 +16,6 @@ public interface IPermissionPrompt {
    * @param request a list of permissions to ask for. {@link PermissionRequest}
    * @return an Observable holding an PermissionPack instance.
    */
-  Observable<PermissionPack> promptPermissions(PermissionRequest request);
+  Observable<PermissionPack> promptPermissions(String promptId, PermissionRequest request);
 
 }
