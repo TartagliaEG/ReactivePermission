@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
   package="br.com.tartagliaeg.rxp">
 
-  <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-  <uses-permission android:name="android.permission.CAMERA" />
+  <!--<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />-->
+  <!--<uses-permission android:name="android.permission.CAMERA" />-->
 
   <application
     android:allowBackup="true"
@@ -12,23 +12,18 @@
     android:roundIcon="@mipmap/ic_launcher_round"
     android:supportsRtl="true"
     android:theme="@style/AppTheme">
-    <activity
-      android:name=".debug.TestActivity"
-      android:label="@string/title_activity_main"
-      android:theme="@style/AppTheme.NoActionBar">
-      <intent-filter>
-        <category android:name="android.intent.category.LAUNCHER" />
-        <action android:name="android.intent.action.MAIN" />
-      </intent-filter>
-    </activity>
-    <activity
-      android:name=".prompt.notification.PermissionPromptNotificationActivity"
-      android:theme="@style/PermissionActivity" />
+    <!--<activity-->
+    <!--android:name=".debug.TestActivity"-->
+    <!--android:label="@string/title_activity_main"-->
+    <!--android:theme="@style/AppTheme.NoActionBar">-->
+    <!--<intent-filter>-->
+    <!--<category android:name="android.intent.category.LAUNCHER" />-->
+    <!--<action android:name="android.intent.action.MAIN" />-->
+    <!--</intent-filter>-->
+    <!--</activity>-->
     <activity
       android:name=".domain.PermissionRationaleActivity"
-      android:theme="@style/NeverAskAgainActivity"
-      />
+      android:theme="@style/NeverAskAgainActivity" />
 
   </application>
-
 </manifest>
